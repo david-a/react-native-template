@@ -10,7 +10,7 @@ MainView = React.createClass({
       "style": styles.container
     }, React.createElement(Text, {
       "style": styles.welcome
-    }, "Welcome to React Native! :)"), React.createElement(Text, {
+    }, "Welcome to React Native Template! :)"), React.createElement(Text, {
       "style": styles.instructions
     }, "To get started, edit index.ios.coffee", '\n', "Press Cmd+R to test", this.props.myCustomProp));
   }
