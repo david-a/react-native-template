@@ -10,7 +10,7 @@ var config = {
     files: 'src/**/*.coffee'
   },
   index: {src: 'index.ios.coffee', dist: './'},
-  files: {src: 'src/**/*.coffee', dist: './app'}
+  files: {src: 'src/**/*.coffee', dist: './dist'}
 }
 
 gulp.task('build', function() {

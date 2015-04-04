@@ -5,7 +5,7 @@ React = require('react-native');
 
 AppRegistry = React.AppRegistry;
 
-App = require('./app/App');
+App = require('./dist/app');
 
 AppRegistry.registerComponent('ReactNativeCoffee', function() {
   return App;

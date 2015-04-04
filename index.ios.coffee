@@ -3,6 +3,6 @@
 React = require 'react-native'
 { AppRegistry } = React
 
-App = require './app/App'
+App = require './dist/app'
 
 AppRegistry.registerComponent('ReactNativeCoffee', () -> App)
