@@ -1,4 +1,4 @@
-## React Native Template using CoffeeScript and Jade
+## React Native Template using CoffeeScript
 
 #### clone and little change from https://github.com/diegodurli/ReactNativeCoffee
 
@@ -21,4 +21,3 @@ $ open ReactNativeCoffee.xcodeproj # and click build
 ### references 
 
 https://github.com/diegodurli/ReactNativeCoffee
-https://github.com/jadejs/react-jade
