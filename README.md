@@ -16,6 +16,8 @@
 
 https://github.com/diegodurli/ReactNativeCoffee
 
+https://github.com/ele828/react-native-guide
+
 ### React Native Tips
 - Docs: [http://facebook.github.io/react-native/docs/getting-started.html](http://facebook.github.io/react-native/docs/getting-started.html)
 - Reload: Command + R
