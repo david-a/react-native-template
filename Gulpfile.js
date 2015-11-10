@@ -2,46 +2,37 @@ var gulp   = require('gulp');
 var gutil  = require('gulp-util');
 var coffee = require('gulp-coffee');
 var exec   = require('gulp-exec');
-var rename = require('gulp-rename');
+var newer = require('gulp-newer');
 
 var config = {
-  watchers: {
-    index: '*.coffee',
-    files: 'src/**/*.coffee'
-  },
-  index: {src: 'index.ios.coffee', dist: './'},
-  files: {src: 'src/**/*.coffee', dist: './dist'}
+  index: {src: 'index.ios.coffee', dest: './'},
+  files: {src: 'app/**/*.coffee', dest: './app/dist'}
 }
 
-gulp.task('build', function() {
-  var options = {
-    continueOnError: false, // default = false, true means don't emit error event 
-    pipeStdout: true
-  };
+var build_options = {
+  continueOnError: false, // default = false, true means don't emit error event
+  pipeStdout: true
+};
 
-  gulp.src(config.files.src)
-    .pipe(exec('cjsx-transform <%= file.path %>', options))
-    .pipe(rename(function (path) {
-      path.extname = '.js';
-    }))
+var gulpIt = function(src, dest) {
+  gulp.src(src)
+    .pipe(newer({dest: dest, ext: '.js'}))
+    .pipe(exec('cjsx-transform <%= file.path %>', build_options))
     .pipe(coffee({bare: true}).on('error', gutil.log))
-    .pipe(gulp.dest(config.files.dist));
+    .pipe(gulp.dest(dest));
+}
+
+gulp.task('buildIndex', function() {
+  gulpIt(config.index.src, config.index.dest)
 });
 
-gulp.task('cjsx', ['build'], function() {
-  var options = {
-    continueOnError: false, // default = false, true means don't emit error event 
-  	pipeStdout: true
-  };
-
-  gulp.src(config.index.src)
-    .pipe(exec('cjsx-transform <%= file.path %>', options))
-    .pipe(coffee({bare: true}).on('error', gutil.log))
-    .pipe(gulp.dest(config.index.dist));
+gulp.task('buildFiles', function() {
+  gulpIt(config.files.src, config.files.dest)
 });
 
-gulp.task('watch', ['cjsx'], function() {
-  gulp.watch([config.watchers.index, config.watchers.files], ['cjsx']);
+gulp.task('watch', ['buildIndex', 'buildFiles'], function() {
+  gulp.watch(config.index.src, ['buildIndex']);
+  gulp.watch(config.files.src, ['buildFiles']);
 });
 
 gulp.task('default', ['watch']);
